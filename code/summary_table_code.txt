@@ -1,0 +1,41 @@
+library("reactable")
+
+# SUMMARY TABLE FOR THESIS ? ####
+# in order: ccle, NCI60 Siddiqui, Breast Siddiqui, Hassan, NCI60 Zampieri
+data_names <- c("CCLE", "NCI-60 (Siddiqui)", "GSE37751", "GSE148892", "GSE32474")
+cell_lines <- c(length(colnames(genes_ccle)), length(colnames(genes_NCI60)), length(colnames(genes_breast)), 
+                length(colnames(genes_hassan)), length(colnames(genes_zamp)))
+genes_number <- c(length(rownames(genes_ccle)), length(rownames(genes_NCI60)), length(rownames(genes_breast)), 
+                  length(rownames(genes_hassan)), length(rownames(genes_zamp)))
+metab_number <- c(length(rownames(metab_ccle)), length(rownames(metab_NCI60)), length(rownames(metab_breast)), 
+                  length(rownames(metab_hassan)), length(rownames(metab_zamp)))
+PMIDs <- c("31068703", "29506475", "29506475", "32509585", "31015463")
+
+rnaseq_tec <- c("RNA-seq (Illumina HiSeq 2000 or HiSeq 2500) + STAR 2.4.2a + RNA-SeQC v1.1.8", 
+                "Affymetrix U133 microarray + Affymetrix MAS5 algorithms", "Affymetrix Gene Chip Human Gene 1.0 ST Arrays + RMA algorithm", 
+                "RNA-seq (Next-Seq 500 system) + TopHat2", "Affymetrix Human Genome U133 Plus 2.0 Array + TRRUST")
+metab_tec <- c("LC-MS + MultiQuant 1.2 software (SCIEX)", "Metabolon platform + Metabolon algorithm", "Metabolon platform + Metabolon algorithm",
+               "LC-MS/MS + XCMS + CAMERA + METLIN", "FIA-TOFMS (Agilent 6550 iFunnel Q-TOF LC-MS System) + Recon2")
+
+table <- cbind(data_names, cell_lines, genes_number, metab_number, PMIDs, rnaseq_tec, metab_tec)
+
+reactable(
+  table,
+  defaultColDef = colDef(
+    align = "center",
+    minWidth = 70,
+    headerStyle = list(background = "cornflowerblue"),
+  ),
+  bordered = T,
+  striped = T,
+  
+  columns = list(
+    data_names = colDef(name = "Name"),
+    cell_lines = colDef(name = "# Cell Lines"),
+    genes_number = colDef(name = "# Genes"),
+    metab_number = colDef(name = "# Metabolites"),
+    PMIDs = colDef(name = "PMID"),
+    rnaseq_tec = colDef(name = "RNAseq Technique"),
+    metab_tec = colDef(name = "Metabolome Technique")
+  )
+)

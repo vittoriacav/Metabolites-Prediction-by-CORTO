@@ -1,0 +1,36 @@
+---
+title: "Edinburgh Biodiversity"
+author: John Doe
+date: 22/Oct/2016
+output: html_document
+---
+
+
+```{r Initialization}
+A <- c("a", "a", "b", "b")
+B <- c(5, 10, 15, 20)
+dataframe <- data.frame(A, B)
+print(dataframe)
+```
+
+
+# Main title
+## Subtitle
+Text text
+
+```{r plot1}
+plot(rnorm(1000),main="Hello")
+```
+
+More text, now in **bold**.
+
+# The next will tuirn off warnings and unnecessary text
+```{r plot2,echo=FALSE,message=FALSE,warning=FALSE,results="hide"}
+pb<-txtProgressBar(0,100,style=3)
+for(i in 1:100){
+  setTxtProgressBar(pb,i)
+}
+plot(rnorm(1000),main="Extra message")
+```
+
+
